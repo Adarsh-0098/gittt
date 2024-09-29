@@ -1,0 +1,39 @@
+<!-- templates/appointment/vital_analysis.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vital Analysis</title>
+</head>
+<body>
+    <h1>Enter Your Vital Signs</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="heart_rate">Heart Rate (bpm):</label>
+        <input type="number" name="heart_rate" required><br><br>
+
+        <label for="respiratory_rate">Respiratory Rate (breaths/min):</label>
+        <input type="number" name="respiratory_rate" required><br><br>
+
+        <label for="body_temperature">Body Temperature (°C):</label>
+        <input type="number" step="0.1" name="body_temperature" required><br><br>
+
+        <label for="oxygen_saturation">Oxygen Saturation (%):</label>
+        <input type="number" name="oxygen_saturation" required><br><br>
+
+        <label for="systolic_blood_pressure">Systolic Blood Pressure (mmHg):</label>
+        <input type="number" name="systolic_blood_pressure" required><br><br>
+
+        <label for="diastolic_blood_pressure">Diastolic Blood Pressure (mmHg):</label>
+        <input type="number" name="diastolic_blood_pressure" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if result %}
+        <h2>Predicted Risk Category: {{ result }}</h2>
+        <p>{{ issues_report }}</p>
+    {% endif %}
+</body>
+</html>

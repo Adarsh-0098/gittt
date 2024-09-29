@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #fff;
+            color: #333;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Particles Background */
+        .particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .login-container {
+            background-color: #ff6b6b; /* Red background */
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 340px;
+            animation: slideIn 0.5s ease-in-out; /* Slide in animation */
+        }
+
+        /* Slide In Animation */
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #fff; /* White text */
+        }
+
+        .login-container button {
+            background-color: #f74c4c; /* Darker red */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+            font-size: 16px; /* Increase font size for button */
+        }
+
+        .login-container button:hover {
+            background-color: #ff2b2b; /* Bright red on hover */
+        }
+
+        .login-container a {
+            color: #fff; /* White text */
+            text-decoration: underline;
+            margin-top: 10px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .login-container a:hover {
+            color: #f74c4c; /* Change color on hover */
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #fff; /* White border */
+            border-radius: 6px;
+            background-color: #ff6b6b; /* Red background */
+            color: white;
+            transition: border-color 0.3s ease;
+        }
+
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            border-color: #f74c4c; /* Darker red on focus */
+            outline: none; /* Remove outline */
+        }
+
+        .messages {
+            color: #fffa65; /* Yellow text for messages */
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ff2b2b; /* Light red background for messages */
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 30px;
+            }
+
+            .login-container h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles-js"></div> <!-- Particles.js Background -->
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+
+        {% if messages %}
+            <div class="messages">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+    </div>
+
+    <!-- Particles.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- Initialize Particles.js -->
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ff6b6b" // Match particle color to healthcare theme
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ff6b6b", // Match line color to healthcare theme
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "repulse": {
+                        "distance": 100,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
